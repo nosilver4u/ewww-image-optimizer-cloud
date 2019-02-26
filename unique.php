@@ -162,7 +162,7 @@ function ewww_image_optimizer_cloud_key_missing() {
 		$options_page = 'options-general.php';
 	}
 	$settings_url = admin_url( "$options_page?page=" . plugin_basename( EWWW_IMAGE_OPTIMIZER_PLUGIN_FILE ) );
-	echo "<div id='ewww-image-optimizer-cloud-key-missing' class='error'><p><strong>" .
+	echo "<div id='ewww-image-optimizer-cloud-key-missing' class='notice notice-error'><p><strong>" .
 		esc_html__( 'EWWW I.O. Cloud requires an API key or an ExactDN subscription to optimize images.', 'ewww-image-optimizer-cloud' ) .
 		"</strong> <a href='https://ewww.io/plans/'>" . esc_html__( 'Purchase a subscription.', 'ewww-image-optimizer-cloud' ) .
 		"</a> <a href='$settings_url'>" . esc_html__( 'Then, activate it on the settings page.', 'ewww-image-optimizer-cloud' ) . '</a></p></div>';
