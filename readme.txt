@@ -2,9 +2,9 @@
 Contributors: nosilver4u
 Tags: image, compress, resize, optimize, optimization, lossless, lossy, seo, webp, wp-cli, scale, tinypng, tinyjpg
 Requires at least: 4.9
-Tested up to: 5.1
+Tested up to: 5.2
 Requires PHP: 5.6
-Stable tag: 4.7.2
+Stable tag: 4.7.3
 License: GPLv3
 
 Speed up your website and improve your visitors' experience by automatically compressing and resizing images and PDFs. Boost SEO and improve sales.
@@ -139,6 +139,17 @@ http://developer.yahoo.com/performance/rules.html#opt_images
 
 * Feature requests can be viewed and submitted at https://github.com/nosilver4u/ewww-image-optimizer/labels/enhancement
 * If you would like to help translate this plugin in your language, get started here: https://translate.wordpress.org/projects/wp-plugins/ewww-image-optimizer-cloud/
+
+= 4.7.3 =
+* added: disable WebP script block on certain pages by defining EWWW_IMAGE_OPTIMIZER_NO_JS as true
+* changed: use SVG inline image placeholder if width and height are known when LQIP is disabled or ExactDN is not available
+* changed: Lazy Load ignores images using browser-native loading attribute
+* fixed: page parsers (ExactDN, Lazy, JS WebP) do not properly handle attributes that start on a new line
+* fixed: page parsers do not recognize img elements with unquoted attributes
+* fixed: uninstaller cannot clear queue table due to undefined table name
+* fixed: implode throws notice when image sizes array is multi-dimensional
+* fixed: srcset url replaced incorrectly when using pixel density descriptors
+* fixed: srcset url added with 0 width when width attribute is empty
 
 = 4.7.2 =
 * changed: JS WebP no longer necessary with ExactDN
