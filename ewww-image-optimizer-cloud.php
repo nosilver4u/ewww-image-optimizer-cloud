@@ -13,7 +13,7 @@ Plugin Name: EWWW Image Optimizer Cloud
 Plugin URI: https://ewww.io/
 Description: Reduce file sizes for images within WordPress including NextGEN Gallery and GRAND FlAGallery via paid cloud service.
 Author: Exactly WWW
-Version: 4.8.1
+Version: 4.9.0
 Author URI: https://ewww.io/
 License: GPLv3
 */
@@ -69,7 +69,7 @@ if ( ! defined( 'PHP_VERSION_ID' ) || PHP_VERSION_ID < 50600 ) {
 	 */
 	require_once( EWWW_IMAGE_OPTIMIZER_PLUGIN_PATH . 'unique.php' );
 	/**
-	 * All the 'common' functions for both EWWW I.O. functions.
+	 * All the 'common' functions for both EWWW I.O. plugins.
 	 */
 	require_once( EWWW_IMAGE_OPTIMIZER_PLUGIN_PATH . 'common.php' );
 	/**

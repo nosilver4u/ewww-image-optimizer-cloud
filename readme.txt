@@ -1,10 +1,10 @@
 === EWWW Image Optimizer Cloud ===
 Contributors: nosilver4u
-Tags: image, compress, resize, optimize, optimization, lossless, lossy, seo, webp, wp-cli, scale, tinypng, tinyjpg
+Tags: optimize, image, convert, webp, resize, compress, lazy load, optimization, lossless, lossy, seo, scale
 Requires at least: 5.0
 Tested up to: 5.2
 Requires PHP: 5.6
-Stable tag: 4.8.1
+Stable tag: 4.9.0
 License: GPLv3
 
 Speed up your website and improve your visitors' experience by automatically compressing and resizing images and PDFs. Boost SEO and improve sales.
@@ -131,14 +131,25 @@ See https://docs.ewww.io/article/39-bulk-optimizer-failure for full troubleshoot
 
 = I want to know more about image optimization. =
 
-That's not really a question, but since I made it up, I'll answer it. See these resources:
-https://developers.google.com/speed/docs/insights/OptimizeImages
-http://developer.yahoo.com/performance/rules.html#opt_images
+That's not really a question, but since I made it up, I'll answer it. See this resource:
+https://developers.google.com/web/tools/lighthouse/audits/optimize-images
 
 == Changelog ==
 
 * Feature requests can be viewed and submitted at https://github.com/nosilver4u/ewww-image-optimizer/labels/enhancement
 * If you would like to help translate this plugin in your language, get started here: https://translate.wordpress.org/projects/wp-plugins/ewww-image-optimizer-cloud/
+
+= 4.9.0 =
+* added: Lazy Load background image support for section elements
+* added: ExactDN background image support for li,span, and section elements
+* added: lazysizes print plugin, enable via EWWW_IMAGE_OPTIMIZER_LAZY_PRINT constant
+* added: compatibility with upcoming Easy Image Optimizer
+* changed: automatic compression disabled during WP/LR Sync with admin notice
+* changed: Lazy Load PNG placeholders capped at 1920px wide to prevent errors
+* changed: use ExactDN, when active, for Lazy Load PNG placeholders
+* changed: EWWW_MEMORY_LIMIT renamed to EIO_MEMORY_LIMIT for setting plugin memory limit
+* fixed: WebP test image not refreshing after inserting .htaccess rules
+* fixed: errors when manually adding lazysizes script
 
 = 4.8.1 =
 * added: Lazy Load background image support added for span elements
