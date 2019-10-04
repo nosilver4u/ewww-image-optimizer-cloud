@@ -193,6 +193,9 @@ function ewww_image_optimizer_cloud_key_missing() {
 function ewww_image_optimizer_mimetype( $path, $case ) {
 	ewwwio_debug_message( '<b>' . __FUNCTION__ . '()</b>' );
 	ewwwio_debug_message( "testing mimetype: $path" );
+	if ( false !== strpos( $path, '..' ) ) {
+		return false;
+	}
 	$type = false;
 	if ( 'i' === $case && ewww_image_optimizer_stream_wrapped( $path ) ) {
 		return ewww_image_optimizer_quick_mimetype( $path );
@@ -296,8 +299,7 @@ function ewww_image_optimizer( $file, $gallery_type = 4, $converted = false, $ne
 	if ( ! defined( 'EWWW_IMAGE_OPTIMIZER_CLOUD' ) ) {
 		ewww_image_optimizer_cloud_init();
 	}
-	$bypass_optimization = apply_filters( 'ewww_image_optimizer_bypass', false, $file );
-	if ( true === $bypass_optimization ) {
+	if ( apply_filters( 'ewww_image_optimizer_bypass', false, $file ) ) {
 		ewwwio_debug_message( "optimization bypassed: $file" );
 		// Tell the user optimization was skipped.
 		return array( false, __( 'Optimization skipped', 'ewww-image-optimizer-cloud' ), $converted, $file );
@@ -319,8 +321,14 @@ function ewww_image_optimizer( $file, $gallery_type = 4, $converted = false, $ne
 	// Initialize the original filename.
 	$original = $file;
 	$result   = '';
+	if ( false !== strpos( $file, '..' ) ) {
+		$msg = __( 'Path traversal in filename not allowed.', 'ewww-image-optimizer-cloud' );
+		ewwwio_debug_message( "file is using .. potential path traversal blocked: $file" );
+		ewww_image_optimizer_s3_uploads_image_cleanup( $file );
+		return array( false, $msg, $converted, $original );
+	}
 	// Check that the file exists.
-	if ( false === is_file( $file ) ) {
+	if ( ! ewwwio_is_file( $file ) ) {
 		/* translators: %s: Image filename */
 		$msg = sprintf( __( 'Could not find %s', 'ewww-image-optimizer-cloud' ), $file );
 		ewwwio_debug_message( "file doesn't appear to exist: $file" );
@@ -328,7 +336,7 @@ function ewww_image_optimizer( $file, $gallery_type = 4, $converted = false, $ne
 		return array( false, $msg, $converted, $original );
 	}
 	// Check that the file is writable.
-	if ( false === is_writable( $file ) ) {
+	if ( ! is_writable( $file ) ) {
 		/* translators: %s: Image filename */
 		$msg = sprintf( __( '%s is not writable', 'ewww-image-optimizer-cloud' ), $file );
 		ewwwio_debug_message( "couldn't write to the file $file" );
@@ -622,25 +630,28 @@ function ewww_image_optimizer( $file, $gallery_type = 4, $converted = false, $ne
  */
 function ewww_image_optimizer_webp_create( $file, $orig_size, $type, $tool, $recreate = false ) {
 	ewwwio_debug_message( '<b>' . __FUNCTION__ . '()</b>' );
-	$webpfile    = $file . '.webp';
-	$bypass_webp = apply_filters( 'ewww_image_optimizer_bypass_webp', false, $file );
-	if ( true === $bypass_webp ) {
+	$webpfile = $file . '.webp';
+	if ( apply_filters( 'ewww_image_optimizer_bypass_webp', false, $file ) ) {
 		ewwwio_debug_message( "webp generation bypassed: $file" );
 		return '';
 	} elseif ( ! ewww_image_optimizer_get_option( 'ewww_image_optimizer_webp' ) ) {
 		return '';
-	} elseif ( is_file( $webpfile ) && empty( $_REQUEST['ewww_force'] ) && ! $recreate ) {
+	} elseif ( ! ewwwio_is_file( $file ) ) {
+		return esc_html__( 'Could not find file.', 'ewww-image-optimizer-cloud' );
+	} elseif ( ! is_writable( $file ) ) {
+		return esc_html__( 'File is not writable.', 'ewww-image-optimizer-cloud' );
+	} elseif ( ewwwio_is_file( $webpfile ) && empty( $_REQUEST['ewww_force'] ) && ! $recreate ) {
 		ewwwio_debug_message( 'webp file exists, not forcing or recreating' );
 		return esc_html__( 'WebP image already exists.', 'ewww-image-optimizer-cloud' );
 	}
 	ewww_image_optimizer_cloud_optimizer( $file, $type, false, $webpfile, 'image/webp' );
 	$webp_size = ewww_image_optimizer_filesize( $webpfile );
 	ewwwio_debug_message( "webp is $webp_size vs. $type is $orig_size" );
-	if ( is_file( $webpfile ) && $orig_size < $webp_size && ! ewww_image_optimizer_get_option( 'ewww_image_optimizer_webp_force' ) ) {
+	if ( ewwwio_is_file( $webpfile ) && $orig_size < $webp_size && ! ewww_image_optimizer_get_option( 'ewww_image_optimizer_webp_force' ) ) {
 		ewwwio_debug_message( 'webp file was too big, deleting' );
 		unlink( $webpfile );
 		return esc_html__( 'WebP image was larger than original.', 'ewww-image-optimizer-cloud' );
-	} elseif ( is_file( $webpfile ) ) {
+	} elseif ( ewwwio_is_file( $webpfile ) ) {
 		// Set correct file permissions.
 		$stat  = stat( dirname( $webpfile ) );
 		$perms = $stat['mode'] & 0000666; // same permissions as parent folder, strip off the executable bits.
