@@ -612,6 +612,7 @@ function ewww_image_optimizer( $file, $gallery_type = 4, $converted = false, $ne
 	}
 	if ( ! empty( $webp_result ) && ! empty( $_REQUEST['ewww_webp_only'] ) ) {
 		$result = $webp_result;
+		return array( true, $result, $converted, $original );
 	}
 	ewwwio_memory( __FUNCTION__ );
 	// otherwise, send back the filename, the results (some sort of error message), the $converted flag, and the name of the original image.
