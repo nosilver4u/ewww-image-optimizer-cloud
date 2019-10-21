@@ -193,7 +193,7 @@ function ewww_image_optimizer_cloud_key_missing() {
 function ewww_image_optimizer_mimetype( $path, $case ) {
 	ewwwio_debug_message( '<b>' . __FUNCTION__ . '()</b>' );
 	ewwwio_debug_message( "testing mimetype: $path" );
-	if ( false !== strpos( $path, '..' ) ) {
+	if ( false !== strpos( $path, '../' ) ) {
 		return false;
 	}
 	$type = false;
@@ -321,7 +321,7 @@ function ewww_image_optimizer( $file, $gallery_type = 4, $converted = false, $ne
 	// Initialize the original filename.
 	$original = $file;
 	$result   = '';
-	if ( false !== strpos( $file, '..' ) ) {
+	if ( false !== strpos( $file, '../' ) ) {
 		$msg = __( 'Path traversal in filename not allowed.', 'ewww-image-optimizer-cloud' );
 		ewwwio_debug_message( "file is using .. potential path traversal blocked: $file" );
 		ewww_image_optimizer_s3_uploads_image_cleanup( $file );
