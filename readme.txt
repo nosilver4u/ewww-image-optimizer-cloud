@@ -140,6 +140,7 @@ https://developers.google.com/web/tools/lighthouse/audits/optimize-images
 * If you would like to help translate this plugin in your language, get started here: https://translate.wordpress.org/projects/wp-plugins/ewww-image-optimizer-cloud/
 
 = 5.1.4 =
+* fixed: warnings on FlaGallery's manage gallery page
 * fixed: EWWW IO resize limits are ignored when higher than WP default
 * fixed: WebP images not removed from remote storage when an attachment is deleted (WP Offload Media)
 * fixed: after running regen for single thumbs with Image Regenerate & Select Crop plugin, regenerated images were not automatically optimized
