@@ -98,7 +98,9 @@ function ewww_image_optimizer_set_defaults() {
 	add_option( 'ewww_image_optimizer_exactdn', false );
 	add_option( 'exactdn_all_the_things', true );
 	add_option( 'exactdn_lossy', true );
+	add_option( 'exactdn_exclude', '' );
 	add_option( 'ewww_image_optimizer_lazy_load', false );
+	add_option( 'ewww_image_optimizer_ll_exclude', '' );
 	add_option( 'ewww_image_optimizer_webp_for_cdn', false );
 
 	add_site_option( 'ewww_image_optimizer_metadata_remove', true );
