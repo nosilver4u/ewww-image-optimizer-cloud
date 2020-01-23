@@ -171,7 +171,7 @@ function ewww_image_optimizer_cloud_key_missing() {
 	) {
 		echo "<div id='ewww-image-optimizer-cloud-key-missing' class='notice notice-error'><p><strong>" .
 			esc_html__( 'EWWW I.O. Cloud requires an API key to optimize images.', 'ewww-image-optimizer-cloud' ) .
-			"</strong><br><a href='https://ewww.io/plans/'>" . esc_html__( 'Purchase a subscription.', 'ewww-image-optimizer-cloud' ) .
+			"</strong><br><a href='https://ewww.io/buy-credits/'>" . esc_html__( 'Purchase a subscription.', 'ewww-image-optimizer-cloud' ) .
 			"</a><br><a href='$settings_url'>" . esc_html__( 'Then, activate it on the settings page.', 'ewww-image-optimizer-cloud' ) . '</a></p></div>';
 	} else {
 		echo "<div id='ewww-image-optimizer-cloud-key-missing' class='notice notice-error'><p><strong>" .
