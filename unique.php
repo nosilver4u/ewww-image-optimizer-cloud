@@ -160,11 +160,10 @@ function ewww_image_optimizer_cloud_key_missing() {
 		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 	}
 	if ( is_multisite() && is_plugin_active_for_network( EWWW_IMAGE_OPTIMIZER_PLUGIN_FILE_REL ) ) {
-		$options_page = 'network/settings.php';
+		$settings_url = admin_url( 'settings.php?page=ewww-image-optimizer-options' );
 	} else {
-		$options_page = 'options-general.php';
+		$settings_url = admin_url( 'options-general.php?page=ewww-image-optimizer-options' );
 	}
-	$settings_url = admin_url( "$options_page?page=" . plugin_basename( EWWW_IMAGE_OPTIMIZER_PLUGIN_FILE ) );
 	global $exactdn;
 	if ( ! ewww_image_optimizer_get_option( 'ewww_image_optimizer_cloud_key' ) &&
 		empty( $_POST['ewww_image_optimizer_cloud_key'] ) &&
