@@ -1,10 +1,10 @@
 === EWWW Image Optimizer Cloud ===
 Contributors: nosilver4u
 Tags: optimize, image, convert, webp, resize, compress, lazy load, optimization, lossless, lossy, seo, scale
-Requires at least: 5.0
-Tested up to: 5.4
+Requires at least: 5.2
+Tested up to: 5.5
 Requires PHP: 5.6
-Stable tag: 5.6.0
+Stable tag: 5.6.1
 License: GPLv3
 
 Speed up your website to better connect with your visitors. Properly compress and size/scale images. Includes lazy load and WebP convert.
@@ -138,6 +138,15 @@ https://developers.google.com/web/tools/lighthouse/audits/optimize-images
 
 * Feature requests can be viewed and submitted at https://feedback.ewww.io
 * If you would like to help translate this plugin in your language, get started here: https://translate.wordpress.org/projects/wp-plugins/ewww-image-optimizer-cloud/
+
+= 5.6.1 =
+* changed: prevent unintentional image re-optimization from plugins with a threshold of 5x, indicate intential regen with ewww_image_optimizer_allowed_reopt filter
+* changed: include lazy load and WebP in optimization score
+* fixed: query paramaters added to videos via image_downsize filter
+* fixed: WP-CLI command triggers async queueing
+* fixed: WPML check skips too many images during bulk scanner
+* fixed: WP-CLI command options for FlAGallery and NextGEN using outdated code
+* fixed: re-optimization tracker not tracking
 
 = 5.6.0 =
 * added: tool to remove originals for converted images
