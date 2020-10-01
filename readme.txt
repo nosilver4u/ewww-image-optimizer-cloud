@@ -1,6 +1,6 @@
 === EWWW Image Optimizer Cloud ===
 Contributors: nosilver4u
-Tags: optimize, image, convert, webp, resize, compress, lazy load, optimization, lossless, lossy, seo, scale
+Tags: optimize, image, convert, webp, resize, compress, lazy load, optimization, lossless, lossy, seo, scale, translator 
 Requires at least: 5.2
 Tested up to: 5.5
 Requires PHP: 5.6
